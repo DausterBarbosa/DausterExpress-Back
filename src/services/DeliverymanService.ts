@@ -29,6 +29,18 @@ class DeliverymanService {
 
         return deliverymans;
     }
+
+    async update(id, data:DeliverymanData){
+        const deliverymanRepository = AppDataSource.getRepository(Deliveryman);
+
+        await deliverymanRepository.save({id, ...data});
+    }
+
+    async delete(id){
+        const deliverymanRepository = AppDataSource.getRepository(Deliveryman);
+
+        await deliverymanRepository.delete({id});
+    }
 }
 
 export default new DeliverymanService();
