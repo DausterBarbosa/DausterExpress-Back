@@ -7,12 +7,12 @@ export default function errorHandling(err:any, req:Request, res:Response, next:N
 
     if (err instanceof HttpError) {
         return res.status(err.status).json({
-            success: false,
+            error: true,
             message: err.message
         });
     } else {
         return res.status(500).json({
-            success: false,
+            error: true,
             message: 'Internal Server Error'
         });
     }

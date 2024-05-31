@@ -18,6 +18,17 @@ class DeliverymanService {
 
         await deliverymanRepository.save(data);
     }
+
+    async list(page, take){
+        const deliverymanRepository = AppDataSource.getRepository(Deliveryman);
+
+        const deliverymans = await deliverymanRepository.find({
+            take: take || 5,
+            skip: (page - 1) * take || 0
+        });
+
+        return deliverymans;
+    }
 }
 
 export default new DeliverymanService();

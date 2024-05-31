@@ -25,7 +25,7 @@ class DeliverymanController {
             await DeliverymanService.create(validateData);
             return res.status(200).json({
                 error: false,
-                status: "Usuário criado com sucesso."
+                message: "Usuário criado com sucesso."
             });
         } catch (error:any) {
             if (error instanceof yup.ValidationError) {
@@ -34,6 +34,16 @@ class DeliverymanController {
             }
             next(error);
         }
+    }
+
+    async list(req:Request, res:Response, next:NextFunction){
+        const {page, take} = req.query;
+
+        const deliverymans = await DeliverymanService.list(page, take);
+        return res.status(200).json({
+            error: false,
+            data: deliverymans
+        });
     }
 }
 

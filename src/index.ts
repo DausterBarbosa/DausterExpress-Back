@@ -15,4 +15,4 @@ AppDataSource.initialize().then(async () => {
     app.use(errorHandling);
 
     app.listen(3333);
-}).catch(error => console.log(error))
+}).catch(error => console.log(error));
