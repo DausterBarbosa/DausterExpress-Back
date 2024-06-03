@@ -4,7 +4,7 @@ import Deliveryman from "../entity/Deliveryman";
 
 import HttpError from "../erros/HttpError";
 
-import {DeliverymanData} from "../types";
+import DeliverymanData from "../types/DeliverymanData";
 
 class DeliverymanService {
     async create(data:DeliverymanData){

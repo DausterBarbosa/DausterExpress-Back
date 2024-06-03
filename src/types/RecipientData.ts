@@ -1,6 +1,6 @@
 export default interface DeliverymanData {
     nome: string;
-    sobrenome: string;
+    cnpj: string;
     email: string;
     telefone: string;
     estado: string;
@@ -8,4 +8,5 @@ export default interface DeliverymanData {
     cep: string;
     endereco: string;
     numero: string;
+    complemento: string;
 }

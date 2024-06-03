@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
-export default class Deliveryman {
+export default class Recipient {
     @PrimaryGeneratedColumn("uuid")
     id: number;
 
@@ -9,7 +9,7 @@ export default class Deliveryman {
     nome: string;
 
     @Column()
-    sobrenome: string;
+    cnpj: string;
 
     @Column()
     email: string;
@@ -31,6 +31,9 @@ export default class Deliveryman {
 
     @Column()
     numero: string;
+
+    @Column()
+    complemento: string;
 
     @CreateDateColumn({ type: 'timestamp' })
     created_at: Date;
