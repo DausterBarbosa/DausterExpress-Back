@@ -1,9 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import Order from './Order';
 
 @Entity()
 export default class Recipient {
     @PrimaryGeneratedColumn("uuid")
-    id: number;
+    id: string;
 
     @Column()
     nome: string;
@@ -34,6 +35,11 @@ export default class Recipient {
 
     @Column()
     complemento: string;
+
+    @OneToMany(() => Order, order => order.destinatario, {
+        onDelete: "CASCADE"
+    })
+    order: Order[];
 
     @CreateDateColumn({ type: 'timestamp' })
     created_at: Date;

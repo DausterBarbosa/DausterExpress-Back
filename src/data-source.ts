@@ -3,6 +3,7 @@ import { DataSource } from "typeorm";
 
 import Deliveryman from "./entity/Deliveryman";
 import Recipient from "./entity/Recipient";
+import Order from "./entity/Order";
 
 export const AppDataSource = new DataSource({
     type: "postgres",
@@ -13,7 +14,7 @@ export const AppDataSource = new DataSource({
     database: "hqgsypma",
     synchronize: true,
     logging: false,
-    entities: [Deliveryman, Recipient],
+    entities: [Deliveryman, Recipient, Order],
     migrations: ["src/migration/*.ts"],
     subscribers: [],
 });
