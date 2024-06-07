@@ -28,6 +28,16 @@ class OrderController {
             next(error);
         }
     }
+
+    async list(req:Request, res:Response, next:NextFunction){
+        const {page, take, status, encomenda} = req.query;
+
+        const orders = await OrderService.list(page, take, status, encomenda);
+        return res.status(200).json({
+            error: false,
+            data: orders
+        });
+    }
 }
 
 export default new OrderController();

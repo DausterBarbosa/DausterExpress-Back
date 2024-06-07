@@ -7,6 +7,7 @@ import Order from "../entity/Order";
 import Recipient from "../entity/Recipient";
 import Deliveryman from "../entity/Deliveryman";
 import HttpError from "../erros/HttpError";
+import { ILike } from "typeorm";
 
 class OrderService {
     async create(data:OrderData){
@@ -32,6 +33,24 @@ class OrderService {
             status: OrderStatusEnum.pendente,
             encomenda: data.encomenda,
         });
+    }
+
+    async list(page, take, status, encomendaName){
+        const orderRepository = AppDataSource.getRepository(Order);
+
+        let whereConditions = { status };
+        if (encomendaName) {
+            whereConditions["encomenda"] = ILike(`%${encomendaName}%`);
+        }
+
+        const orders = await orderRepository.find({
+            take: take || 5,
+            skip: (page - 1) * take || 0,
+            relations: ["entregador", "destinatario"],
+            where: whereConditions,
+        });
+
+        return orders;
     }
 }
 
