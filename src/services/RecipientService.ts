@@ -19,12 +19,19 @@ class RecipientService {
         await recipientRepository.save(data);
     }
 
-    async list(page, take){
+    async list(page, take, mode){
         const recipientRepository = AppDataSource.getRepository(Recipient);
 
+        let selectFields = [];
+
+        if(mode === "summary"){
+            selectFields = ["id", "nome"];
+        }
+
         const recipients = await recipientRepository.find({
-            take: take || 5,
-            skip: (page - 1) * take || 0
+            take,
+            skip: take && (page - 1) * take,
+            select: selectFields,
         });
 
         return recipients;

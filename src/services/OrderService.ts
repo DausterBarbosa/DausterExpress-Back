@@ -48,9 +48,17 @@ class OrderService {
             skip: (page - 1) * take || 0,
             relations: ["entregador", "destinatario"],
             where: whereConditions,
+            order: {
+                created_at: "DESC",
+            }
         });
 
-        return orders;
+        const count = await orderRepository.count();
+
+        return {
+            count,
+            orders
+        };
     }
 }
 

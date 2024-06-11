@@ -19,12 +19,19 @@ class DeliverymanService {
         await deliverymanRepository.save(data);
     }
 
-    async list(page, take){
+    async list(page, take, mode){
         const deliverymanRepository = AppDataSource.getRepository(Deliveryman);
 
+        let selectFields = [];
+
+        if(mode === "summary"){
+            selectFields = ["id", "nome", "sobrenome"];
+        }
+
         const deliverymans = await deliverymanRepository.find({
-            take: take || 5,
-            skip: (page - 1) * take || 0
+            take,
+            skip: take && (page - 1) * take,
+            select: selectFields,
         });
 
         return deliverymans;

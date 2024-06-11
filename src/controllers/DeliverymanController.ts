@@ -37,9 +37,9 @@ class DeliverymanController {
     }
 
     async list(req:Request, res:Response, next:NextFunction){
-        const {page, take} = req.query;
+        const {page, take, mode} = req.query;
 
-        const deliverymans = await DeliverymanService.list(page, take);
+        const deliverymans = await DeliverymanService.list(page, take, mode);
         return res.status(200).json({
             error: false,
             data: deliverymans

@@ -35,7 +35,8 @@ class OrderController {
         const orders = await OrderService.list(page, take, status, encomenda);
         return res.status(200).json({
             error: false,
-            data: orders
+            total: orders.count,
+            data: orders.orders,
         });
     }
 }
