@@ -20,6 +20,15 @@ export default class Order {
     @Column()
     encomenda: string;
 
+    @Column({ type: 'varchar', nullable: true }) 
+    imagem_url: string | null;
+
+    @Column({ type: 'date', nullable: true }) 
+    data_retirada: Date | null;
+
+    @Column({ type: 'date', nullable: true }) 
+    data_entrega: Date | null;
+
     @CreateDateColumn({ type: 'timestamp' })
     created_at: Date;
 

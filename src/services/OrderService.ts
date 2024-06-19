@@ -38,8 +38,13 @@ class OrderService {
     async list(page, take, status, encomendaName){
         const orderRepository = AppDataSource.getRepository(Order);
 
-        let whereConditions = { status };
-        if (encomendaName) {
+        let whereConditions = {};
+
+        if(status !== "todos"){
+            whereConditions["status"] = status;
+        }
+
+        if(encomendaName) {
             whereConditions["encomenda"] = ILike(`%${encomendaName}%`);
         }
 
