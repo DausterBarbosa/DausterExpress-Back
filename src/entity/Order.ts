@@ -23,10 +23,10 @@ export default class Order {
     @Column({ type: 'varchar', nullable: true }) 
     imagem_url: string | null;
 
-    @Column({ type: 'date', nullable: true }) 
+    @Column({ type: 'timestamp', nullable: true }) 
     data_retirada: Date | null;
 
-    @Column({ type: 'date', nullable: true }) 
+    @Column({ type: 'timestamp', nullable: true }) 
     data_entrega: Date | null;
 
     @CreateDateColumn({ type: 'timestamp' })

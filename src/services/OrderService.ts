@@ -8,6 +8,7 @@ import Recipient from "../entity/Recipient";
 import Deliveryman from "../entity/Deliveryman";
 import HttpError from "../erros/HttpError";
 import { ILike } from "typeorm";
+import OrderStatus from "../types/OrderStatus";
 
 class OrderService {
     async create(data:OrderData){
@@ -64,6 +65,16 @@ class OrderService {
             count,
             orders
         };
+    }
+
+    async status(status, id){
+        const orderRepository = AppDataSource.getRepository(Order);
+        
+        await orderRepository.save({
+            id,
+            status,
+            data_retirada: new Date(),
+        });
     }
 }
 

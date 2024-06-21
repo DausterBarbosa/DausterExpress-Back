@@ -12,14 +12,14 @@ export class AddColumnsToOrderTable1718804448278 implements MigrationInterface {
 
         await queryRunner.addColumn("order", new TableColumn({
             name: "data_retirada",
-            type: "date",
+            type: "timestamp",
             isNullable: true,
             default: null,
         }));
 
         await queryRunner.addColumn("order", new TableColumn({
             name: "data_entrega",
-            type: "date",
+            type: "timestamp",
             isNullable: true,
             default: null,
         }));

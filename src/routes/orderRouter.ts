@@ -6,5 +6,6 @@ const orderRouter = Router();
 
 orderRouter.get("/", OrderController.list);
 orderRouter.post("/create", OrderController.create);
+orderRouter.put("/:id/status", OrderController.status)
 
 export default orderRouter;
