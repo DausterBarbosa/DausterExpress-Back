@@ -7,8 +7,10 @@ import Order from "../entity/Order";
 import Recipient from "../entity/Recipient";
 import Deliveryman from "../entity/Deliveryman";
 import HttpError from "../erros/HttpError";
-import { ILike } from "typeorm";
-import OrderStatus from "../types/OrderStatus";
+
+import { Between, ILike } from "typeorm";
+
+import {startOfDay, endOfDay} from "date-fns";
 
 class OrderService {
     async create(data:OrderData){
@@ -75,6 +77,40 @@ class OrderService {
             status,
             data_retirada: new Date(),
         });
+    }
+
+    async allStatus(){
+        const orderRepository = AppDataSource.getRepository(Order);
+
+        const entregues_hoje = await orderRepository.count({
+            where:{
+                status: "entregue",
+                data_entrega: Between(startOfDay(new Date()), endOfDay(new Date())),
+            }
+        });
+        const pendentes = await orderRepository.count({
+            where:{
+                status: "pendente",
+            }
+        });
+        const retirados_hoje = await orderRepository.count({
+            where:{
+                status: "retirado",
+                data_retirada: Between(startOfDay(new Date()), endOfDay(new Date())),
+            }
+        });
+        const problemas = await orderRepository.count({
+            where:{
+                status: "problema",
+            }
+        });
+
+        return {
+            entregues_hoje,
+            pendentes,
+            retirados_hoje,
+            problemas
+        };
     }
 }
 

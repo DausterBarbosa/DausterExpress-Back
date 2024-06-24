@@ -62,6 +62,14 @@ class OrderController {
             next(error);
         }
     }
+
+    async allStatus(req:Request, res:Response, next:NextFunction){
+        const status = await OrderService.allStatus();
+        return res.status(200).json({
+            error: false,
+            data: status,
+        });
+    }
 }
 
 export default new OrderController();
