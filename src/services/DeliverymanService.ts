@@ -1,3 +1,4 @@
+import { ILike } from "typeorm";
 import {AppDataSource} from "../data-source";
 
 import Deliveryman from "../entity/Deliveryman";
@@ -19,22 +20,37 @@ class DeliverymanService {
         await deliverymanRepository.save(data);
     }
 
-    async list(page, take, mode){
+    async list(page, take, mode, deliverymanName){
         const deliverymanRepository = AppDataSource.getRepository(Deliveryman);
 
         let selectFields = [];
 
+        let whereConditions = {};
+
         if(mode === "summary"){
             selectFields = ["id", "nome", "sobrenome"];
+        }
+
+        if(deliverymanName) {
+            whereConditions["nome"] = ILike(`%${deliverymanName}%`);
         }
 
         const deliverymans = await deliverymanRepository.find({
             take,
             skip: take && (page - 1) * take,
             select: selectFields,
+            where: whereConditions,
+            order: {
+                created_at: "DESC",
+            }
         });
 
-        return deliverymans;
+        const count = await deliverymanRepository.count();
+
+        return {
+            count,
+            deliverymans
+        };
     }
 
     async update(id, data:DeliverymanData){

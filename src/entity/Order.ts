@@ -8,10 +8,10 @@ export default class Order {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
-    @ManyToOne(() => Deliveryman, entregador => entregador.order)
+    @ManyToOne(() => Deliveryman, entregador => entregador.order, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
     entregador: Deliveryman;
 
-    @ManyToOne(() => Recipient, destinatario => destinatario.order)
+    @ManyToOne(() => Recipient, destinatario => destinatario.order, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
     destinatario: Recipient;
 
     @Column()

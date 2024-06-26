@@ -37,12 +37,13 @@ class DeliverymanController {
     }
 
     async list(req:Request, res:Response, next:NextFunction){
-        const {page, take, mode} = req.query;
+        const {page, take, mode, entregador} = req.query;
 
-        const deliverymans = await DeliverymanService.list(page, take, mode);
+        const deliverymans = await DeliverymanService.list(page, take, mode, entregador);
         return res.status(200).json({
             error: false,
-            data: deliverymans
+            total: deliverymans.count,
+            data: deliverymans.deliverymans
         });
     }
 
