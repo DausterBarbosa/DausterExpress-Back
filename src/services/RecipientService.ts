@@ -1,3 +1,4 @@
+import { ILike } from "typeorm";
 import {AppDataSource} from "../data-source";
 
 import Recipient from "../entity/Recipient";
@@ -19,22 +20,37 @@ class RecipientService {
         await recipientRepository.save(data);
     }
 
-    async list(page, take, mode){
+    async list(page, take, mode, recipientName){
         const recipientRepository = AppDataSource.getRepository(Recipient);
 
         let selectFields = [];
 
+        let whereConditions = {};
+
         if(mode === "summary"){
             selectFields = ["id", "nome"];
+        }
+
+        if(recipientName) {
+            whereConditions["nome"] = ILike(`%${recipientName}%`);
         }
 
         const recipients = await recipientRepository.find({
             take,
             skip: take && (page - 1) * take,
             select: selectFields,
+            where: whereConditions,
+            order: {
+                created_at: "DESC",
+            }
         });
 
-        return recipients;
+        const count = await recipientRepository.count();
+
+        return {
+            count,
+            recipients
+        };
     }
 
     async update(id, data:RecipientData){

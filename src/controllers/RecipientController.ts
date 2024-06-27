@@ -37,12 +37,13 @@ class RecipientController {
     }
 
     async list(req:Request, res:Response, next:NextFunction){
-        const {page, take, mode} = req.query;
+        const {page, take, mode, destinatario} = req.query;
 
-        const recipients = await RecipientService.list(page, take, mode);
+        const recipients = await RecipientService.list(page, take, mode, destinatario);
         return res.status(200).json({
             error: false,
-            data: recipients
+            total: recipients.count,
+            data: recipients.recipients,
         });
     }
 
