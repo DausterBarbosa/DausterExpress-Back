@@ -20,6 +20,9 @@ export default class Order {
     @Column()
     encomenda: string;
 
+    @Column({ type: 'varchar', nullable: true })
+    description_problem: string;
+
     @Column({ type: 'varchar', nullable: true }) 
     imagem_url: string | null;
 
