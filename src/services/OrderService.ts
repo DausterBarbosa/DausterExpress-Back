@@ -72,11 +72,21 @@ class OrderService {
     async status(status, id){
         const orderRepository = AppDataSource.getRepository(Order);
         
-        await orderRepository.save({
-            id,
-            status,
-            data_retirada: new Date(),
-        });
+        if (status === OrderStatusEnum.retirado){
+            await orderRepository.save({
+                id,
+                status,
+                data_retirada: new Date(),
+            });
+        }
+        else {
+            await orderRepository.save({
+                id,
+                status,
+                data_retirada: new Date(),
+            });
+        }
+        
     }
 
     async allStatus(){
