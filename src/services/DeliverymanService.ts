@@ -1,4 +1,7 @@
 import { ILike } from "typeorm";
+
+import crypto from "crypto";
+
 import {AppDataSource} from "../data-source";
 
 import Deliveryman from "../entity/Deliveryman";
@@ -17,7 +20,16 @@ class DeliverymanService {
             throw new HttpError(409, "Email já cadastrado.");
         }
 
-        await deliverymanRepository.save(data);
+        const token = crypto.randomBytes(32).toString("hex");
+
+        await deliverymanRepository.save({
+            ...data,
+            reset_token: token,
+        });
+
+        // Aqui vai enviar o email com a URL de cadastro de senha
+
+        console.log(`http://localhost:3333/create-password?token=${token}`);
     }
 
     async list(page, take, mode, deliverymanName){

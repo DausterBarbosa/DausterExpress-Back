@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #FFF;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#logo {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#logo .firstword{
+    color: #ff6200;
+    font-size: 40px;
+}
+
+#logo .secondword{
+    color: #4d148c;
+    font-size: 40px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+p {
+    font-size: 20px;
+    text-align: center;
+}
+
+input {
+    margin-top: 10px;
+    padding: 15px;
+    width: 300px;
+    font-size: 20px;
+}
+
+button {
+    font-weight: bold;
+    color: #FFF;
+    background-color: #ff6200;
+    width: 300px;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+button:disabled{
+    background-color: #ec7d38;
+}

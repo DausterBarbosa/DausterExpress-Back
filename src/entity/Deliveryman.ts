@@ -33,6 +33,12 @@ export default class Deliveryman {
     @Column()
     numero: string;
 
+    @Column({ type: 'varchar', nullable: true })
+    reset_token: string;
+
+    @Column({ type: 'varchar', nullable: true })
+    password_hash: string;
+
     @OneToMany(() => Order, order => order.entregador, {
         onDelete: "CASCADE"
     })
