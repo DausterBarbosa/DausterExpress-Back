@@ -8,6 +8,7 @@ import PasswordData from "../types/PasswordData";
 import HttpError from "../erros/HttpError";
 
 import path from "path";
+import LoginData from "../types/LoginData";
 
 class PasswordController{
     async create(req:Request, res:Response, next:NextFunction){
@@ -26,6 +27,28 @@ class PasswordController{
             return res.status(200).json({
                 error: false,
                 message: "Senha cadastrada com sucesso."
+            });
+        } catch (error:any) {
+            if (error instanceof yup.ValidationError) {
+                const validationErrors = error.errors.map((err: string) => err);
+                return next(new HttpError(400, `Validation error: ${validationErrors.join(', ')}`));
+            }
+            next(error);
+        }
+    }
+
+    async login(req:Request, res:Response, next:NextFunction){
+        const schema = yup.object().shape({
+            email: yup.string().required(),
+            password: yup.string().required()
+        }).strict();
+
+        try {
+            const validateData = await schema.validate(req.body, { abortEarly: false }) as LoginData;
+            const token = await PasswordService.login(validateData);
+            return res.status(200).json({
+                error: false,
+                token,
             });
         } catch (error:any) {
             if (error instanceof yup.ValidationError) {

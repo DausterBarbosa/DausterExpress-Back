@@ -6,5 +6,6 @@ const orderRouter = Router();
 
 orderRouter.get("/create", PasswordController.create);
 orderRouter.post("/register", PasswordController.register);
+orderRouter.post("/login", PasswordController.login);
 
 export default orderRouter;
