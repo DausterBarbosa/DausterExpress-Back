@@ -45,10 +45,10 @@ class PasswordController{
 
         try {
             const validateData = await schema.validate(req.body, { abortEarly: false }) as LoginData;
-            const token = await PasswordService.login(validateData);
+            const data = await PasswordService.login(validateData);
             return res.status(200).json({
                 error: false,
-                token,
+                data,
             });
         } catch (error:any) {
             if (error instanceof yup.ValidationError) {

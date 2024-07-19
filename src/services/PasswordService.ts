@@ -55,7 +55,20 @@ class PasswordService{
             expiresIn: "5 days"
         });
 
-        return token;
+        return {
+            token,
+            user: {
+                nome: deliveryman.nome,
+                sobrenome: deliveryman.sobrenome,
+                email: deliveryman.email,
+                telefone: deliveryman.telefone,
+                estado: deliveryman.estado,
+                cidade: deliveryman.cidade,
+                cep: deliveryman.cep,
+                endereco: deliveryman.endereco,
+                numero: deliveryman.numero,
+            }
+        };
     }
 }
 
