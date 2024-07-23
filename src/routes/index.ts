@@ -6,6 +6,7 @@ import orderRouter from "./orderRouter";
 import problemRouter from "./problemRouter";
 import passwordRouter from "./passwordRouter";
 import dashboardRouter from "./dashboardRouter";
+import deliverymanOrderRouter from "./deliverymanOrderRouter";
 
 import authMiddleware from "../middlewares/authMiddleware";
 
@@ -23,5 +24,6 @@ router.use(authMiddleware);
 
 // Rotas do entregador
 router.use("/deliveryman", dashboardRouter);
+router.use("/deliveryman", deliverymanOrderRouter);
 
 export default router;
