@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany } from 'typeorm';
 
 import Deliveryman from "./Deliveryman";
 import Recipient from "./Recipient";
+import Problem from "./Problem";
 
 @Entity()
 export default class Order {
@@ -19,6 +20,9 @@ export default class Order {
     
     @Column()
     encomenda: string;
+
+    @OneToMany(() => Problem, problema => problema.encomenda)
+    problemas: Problem[];
 
     @Column({ type: 'varchar', nullable: true })
     description_problem: string;

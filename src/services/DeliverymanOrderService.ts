@@ -25,7 +25,7 @@ class DeliverymanOrderService{
         const orders = await orderRepository.find({
             take: take || 5,
             skip: (page - 1) * take || 0,
-            relations: ["destinatario"],
+            relations: ["destinatario", "problemas"],
             where: whereConditions,
             order: {
                 created_at: "DESC",

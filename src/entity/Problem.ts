@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne,  } from 'typeorm';
 
 import Order from "./Order";
 
@@ -7,8 +7,7 @@ export default class Problem {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
-    @OneToOne(() => Order, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
-    @JoinColumn()
+    @ManyToOne(() => Order, entrega => entrega.problemas)
     encomenda: Order;
 
     @Column()
