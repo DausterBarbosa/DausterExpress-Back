@@ -1,6 +1,7 @@
 import { AppDataSource } from "../data-source";
 
 import ProblemData from "../types/ProblemData";
+import OrderStatusEnum from "../types/OrderStatusEnum";
 
 import Problem from "../entity/Problem";
 import Order from "../entity/Order";
@@ -18,10 +19,19 @@ class DeliverymanProblemService{
             throw new HttpError(404, "Encomenda não encontrada.");
         }
 
-        await problemRepository.save({
+        order.status = OrderStatusEnum.problema;
+
+        const problem = await problemRepository.save({
             encomenda: order,
             descricao: data.descricao,
         });
+
+        return {
+            id: problem.id,
+            descricao: problem.descricao,
+            created_at: problem.created_at,
+            updated_at: problem.updated_at,
+        };
     }
 }
 

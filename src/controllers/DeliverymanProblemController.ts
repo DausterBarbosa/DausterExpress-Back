@@ -17,10 +17,10 @@ class DeliverymanProblemController{
 
         try {
             const validateData = await schema.validate(req.body, { abortEarly: false }) as ProblemData;
-            await DeliverymanProblemService.create(validateData, req.userId);
+            const problem = await DeliverymanProblemService.create(validateData, req.userId);
             return res.status(200).json({
                 error: false,
-                message: "Problema criado com sucesso."
+                data: problem,
             });
         } catch (error:any) {
             if (error instanceof yup.ValidationError) {
