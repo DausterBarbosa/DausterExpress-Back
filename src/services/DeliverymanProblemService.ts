@@ -21,6 +21,8 @@ class DeliverymanProblemService{
 
         order.status = OrderStatusEnum.problema;
 
+        await orderRepository.save(order);
+
         const problem = await problemRepository.save({
             encomenda: order,
             descricao: data.descricao,
