@@ -4,6 +4,10 @@ import Order from "../entity/Order";
 
 import { ILike } from "typeorm";
 
+import DeliveredData from "../types/DeliveredData";
+
+import OrderStatusEnum from "../types/OrderStatusEnum";
+
 class DeliverymanOrderService{
     async list(page, take, status, encomendaName, userId){
         const orderRepository = AppDataSource.getRepository(Order);
@@ -38,6 +42,22 @@ class DeliverymanOrderService{
             count,
             orders
         };
+    }
+
+    async delivered(data:DeliveredData){
+        const orderRepository = AppDataSource.getRepository(Order);
+
+        const order = await orderRepository.findOne({
+            where: {
+                id: data.encomenda,
+            }
+        });
+
+        order.status = OrderStatusEnum.entregue;
+        order.imagem_url = data.url_image;
+        order.data_entrega = new Date();
+
+        await orderRepository.save(order);
     }
 }
 

@@ -5,5 +5,6 @@ import DeliverymanOrderController from "../controllers/DeliverymanOrderControlle
 const deliverymanRouter = Router();
 
 deliverymanRouter.get("/order", DeliverymanOrderController.list);
+deliverymanRouter.post("/delivered", DeliverymanOrderController.delivered);
 
 export default deliverymanRouter;
