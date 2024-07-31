@@ -9,6 +9,7 @@ import Deliveryman from "../entity/Deliveryman";
 import HttpError from "../erros/HttpError";
 
 import DeliverymanData from "../types/DeliverymanData";
+import PhotoProfileData from "../types/PhotoProfileData";
 
 class DeliverymanService {
     async create(data:DeliverymanData){

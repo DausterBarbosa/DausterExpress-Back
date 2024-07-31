@@ -34,6 +34,9 @@ export default class Deliveryman {
     numero: string;
 
     @Column({ type: 'varchar', nullable: true })
+    url_image_profile: string;
+
+    @Column({ type: 'varchar', nullable: true })
     reset_token: string;
 
     @Column({ type: 'varchar', nullable: true })

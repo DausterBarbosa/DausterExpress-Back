@@ -8,6 +8,7 @@ import passwordRouter from "./passwordRouter";
 import dashboardRouter from "./dashboardRouter";
 import deliverymanOrderRouter from "./deliverymanOrderRouter";
 import deliverymanProblemRouter from "./deliverymanProblemRouter";
+import deliverymanProfileRouter from "./deliverymanProfileRouter";
 
 import authMiddleware from "../middlewares/authMiddleware";
 
@@ -27,5 +28,7 @@ router.use(authMiddleware);
 router.use("/deliveryman", dashboardRouter);
 router.use("/deliveryman", deliverymanOrderRouter);
 router.use("/deliveryman", deliverymanProblemRouter);
+router.use("/deliveryman", deliverymanRouter);
+router.use("/deliveryman", deliverymanProfileRouter);
 
 export default router;

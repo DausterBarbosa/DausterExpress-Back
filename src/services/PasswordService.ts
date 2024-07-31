@@ -67,6 +67,7 @@ class PasswordService{
                 cep: deliveryman.cep,
                 endereco: deliveryman.endereco,
                 numero: deliveryman.numero,
+                url_image_profile: deliveryman.url_image_profile,
             }
         };
     }
