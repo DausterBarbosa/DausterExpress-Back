@@ -58,6 +58,7 @@ class PasswordService{
         return {
             token,
             user: {
+                id: deliveryman.id,
                 nome: deliveryman.nome,
                 sobrenome: deliveryman.sobrenome,
                 email: deliveryman.email,
