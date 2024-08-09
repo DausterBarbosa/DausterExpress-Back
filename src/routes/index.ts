@@ -10,6 +10,7 @@ import deliverymanOrderRouter from "./deliverymanOrderRouter";
 import deliverymanProblemRouter from "./deliverymanProblemRouter";
 import deliverymanProfileRouter from "./deliverymanProfileRouter";
 import deliverymanPasswordRouter from "./deliverymanPasswordRouter";
+import fcmTokenRouter from "./fcmTokenRouter";
 
 import authMiddleware from "../middlewares/authMiddleware";
 
@@ -32,5 +33,6 @@ router.use("/deliveryman", deliverymanProblemRouter);
 router.use("/deliveryman", deliverymanRouter);
 router.use("/deliveryman", deliverymanProfileRouter);
 router.use("/deliveryman", deliverymanPasswordRouter);
+router.use("/deliveryman", fcmTokenRouter);
 
 export default router;

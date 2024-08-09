@@ -12,6 +12,8 @@ import { Between, ILike } from "typeorm";
 
 import {startOfDay, endOfDay} from "date-fns";
 
+import FirebaseService from "./FirebaseService";
+
 class OrderService {
     async create(data:OrderData){
         const orderRepository = AppDataSource.getRepository(Order);
@@ -29,6 +31,8 @@ class OrderService {
         if(!recipient){
             throw new HttpError(409, "Destinatário informado não existe.");
         }
+
+        await FirebaseService.sentNotification();
 
         await orderRepository.save({
             destinatario: recipient,

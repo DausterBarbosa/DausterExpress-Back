@@ -40,6 +40,9 @@ export default class Deliveryman {
     reset_token: string;
 
     @Column({ type: 'varchar', nullable: true })
+    fcm_token: string;
+
+    @Column({ type: 'varchar', nullable: true })
     password_hash: string;
 
     @OneToMany(() => Order, order => order.entregador, {
