@@ -1,17 +1,19 @@
 import admin from "firebase-admin";
 
+const ServiceAccountKey = require("../config/serviceAccountKey.json");
+
 class FirebaseService{
-    async sentNotification(){
+    async sentNotification(fcmToken:string, title:string, body:string){
         admin.initializeApp({
-            credential: admin.credential.cert("")
+            credential: admin.credential.cert(ServiceAccountKey),
         });
 
         admin.messaging().send({
             notification: {
-                title: "Teste",
-                body: "sfasdfasdfasdf"
+                title,
+                body,
             },
-            token: "fdOHLjUoRZubIHFXyMH9yJ:APA91bEr9UvUR2jIrR_8xASNoYsdTtSLSpRxV48IUKVgNMG4VEuQL_FxzvsCd5dHW807SONO6RCHAeHOmqchs_m8EmWxjsFZz-WHm-vABhx82ROH-plR03RB6VotEOLIwrQ6mu8iuOeQ"
+            token: fcmToken,
         }).then((response) => {
             console.log('Mensagem enviada com sucesso:', response);
         }).catch((error) => {

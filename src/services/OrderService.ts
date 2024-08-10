@@ -32,14 +32,14 @@ class OrderService {
             throw new HttpError(409, "Destinatário informado não existe.");
         }
 
-        await FirebaseService.sentNotification();
-
         await orderRepository.save({
             destinatario: recipient,
             entregador: deliveryman,
             status: OrderStatusEnum.pendente,
             encomenda: data.encomenda,
         });
+
+        await FirebaseService.sentNotification(deliveryman.fcm_token, "Você tem uma nova entrega", "Verifique seu novo pacote.");
     }
 
     async list(page, take, status, encomendaName){

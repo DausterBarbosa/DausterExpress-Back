@@ -1,6 +1,6 @@
 import {NextFunction, Response} from "express";
 
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 import CustomRequest from "../types/CustomRequest";
 import HttpError from "../erros/HttpError";
@@ -15,7 +15,7 @@ export default function authMiddleware(req:CustomRequest, res:Response, next:Nex
     try {
         const data = jwt.verify(token, "batinha");
 
-        req.userId = data.id;
+        req.userId = (data as JwtPayload).id as string;
 
         next();
     } catch (error) {
