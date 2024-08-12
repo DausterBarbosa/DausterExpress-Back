@@ -41,7 +41,7 @@ class DeliverymanService {
         let whereConditions = {};
 
         if(mode === "summary"){
-            selectFields = ["id", "nome", "sobrenome", "url_image_profile"];
+            selectFields = ["id", "nome", "sobrenome", "url_image_profile", "fcm_token"];
         }
 
         if(deliverymanName) {

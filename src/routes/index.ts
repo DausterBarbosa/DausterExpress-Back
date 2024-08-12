@@ -11,6 +11,7 @@ import deliverymanProblemRouter from "./deliverymanProblemRouter";
 import deliverymanProfileRouter from "./deliverymanProfileRouter";
 import deliverymanPasswordRouter from "./deliverymanPasswordRouter";
 import fcmTokenRouter from "./fcmTokenRouter";
+import notificationRoute from "./notificationRoute";
 
 import authMiddleware from "../middlewares/authMiddleware";
 
@@ -22,6 +23,7 @@ router.use("/recipient", recipientRouter);
 router.use("/order", orderRouter);
 router.use("/problem", problemRouter);
 router.use("/password", passwordRouter);
+router.use("/notification", notificationRoute);
 
 // Middlware de autenticação
 router.use(authMiddleware);

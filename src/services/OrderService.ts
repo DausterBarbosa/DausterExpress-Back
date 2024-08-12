@@ -75,22 +75,32 @@ class OrderService {
 
     async status(status, id){
         const orderRepository = AppDataSource.getRepository(Order);
-        
-        if (status === OrderStatusEnum.retirado){
-            await orderRepository.save({
+
+        const order = await orderRepository.findOne({
+            where: {
                 id,
-                status,
-                data_retirada: new Date(),
-            });
+            },
+            relations: ["entregador"],
+        });
+
+        order.status = status;
+
+        if(status === OrderStatusEnum.retirado){
+            order.data_retirada = new Date();
         }
-        else {
-            await orderRepository.save({
-                id,
-                status,
-                data_retirada: new Date(),
-            });
+
+        await orderRepository.save(order);
+
+        var messageNotification = "";
+
+        if(status === OrderStatusEnum.retirado){
+            messageNotification = "Seu pacote foi retirado."
         }
-        
+        else if(status === OrderStatusEnum.cancelado){
+            messageNotification = "Você teve uma entrega cancelada."
+        }
+
+        await FirebaseService.sentNotification(order.entregador.fcm_token, messageNotification, "Verifique seu novo status da sua entrega.");
     }
 
     async allStatus(){
