@@ -39,7 +39,7 @@ class OrderService {
             encomenda: data.encomenda,
         });
 
-        await FirebaseService.sentNotification(deliveryman.fcm_token, "Você tem uma nova entrega", "Verifique seu novo pacote.");
+        await FirebaseService.sentNotification(deliveryman.fcm_token, "Você tem uma nova entrega", "Verifique seu novo pacote.", "Entregas");
     }
 
     async list(page, take, status, encomendaName){
@@ -100,7 +100,7 @@ class OrderService {
             messageNotification = "Você teve uma entrega cancelada."
         }
 
-        await FirebaseService.sentNotification(order.entregador.fcm_token, messageNotification, "Verifique seu novo status da sua entrega.");
+        await FirebaseService.sentNotification(order.entregador.fcm_token, messageNotification, "Verifique seu novo status da sua entrega.", "Entregas");
     }
 
     async allStatus(){

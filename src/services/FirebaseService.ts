@@ -8,7 +8,7 @@ if (!admin.apps.length) {
 }
 
 class FirebaseService {
-    async sentNotification(fcmToken: string, title: string, body: string) {
+    async sentNotification(fcmToken: string, title: string, body: string, screenName:string) {
         try {
             const response = await admin.messaging().send({
                 notification: {
@@ -16,6 +16,9 @@ class FirebaseService {
                     body,
                 },
                 token: fcmToken,
+                data: {
+                    screenName,
+                }
             });
             console.log('Mensagem enviada com sucesso:', response);
         } catch (error) {
