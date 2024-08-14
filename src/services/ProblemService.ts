@@ -13,7 +13,7 @@ class ProblemService{
         const orders = await orderRepository.find({
             take: take || 5,
             skip: (page - 1) * take || 0,
-            relations: ["entregador", "destinatario"],
+            relations: ["entregador", "destinatario", "problemas"],
             order: {
                 created_at: "DESC",
             },
