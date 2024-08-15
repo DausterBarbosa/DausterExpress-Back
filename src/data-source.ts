@@ -5,6 +5,7 @@ import Deliveryman from "./entity/Deliveryman";
 import Recipient from "./entity/Recipient";
 import Order from "./entity/Order";
 import Problem from "./entity/Problem";
+import Administrator from "./entity/Administrator";
 
 export const AppDataSource = new DataSource({
     type: "postgres",
@@ -15,7 +16,7 @@ export const AppDataSource = new DataSource({
     database: "hqgsypma",
     synchronize: true,
     logging: false,
-    entities: [Deliveryman, Recipient, Order, Problem],
+    entities: [Deliveryman, Recipient, Order, Problem, Administrator],
     migrations: ["src/migration/*.ts"],
     subscribers: [],
 });

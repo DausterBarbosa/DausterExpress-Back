@@ -12,21 +12,27 @@ import deliverymanProfileRouter from "./deliverymanProfileRouter";
 import deliverymanPasswordRouter from "./deliverymanPasswordRouter";
 import fcmTokenRouter from "./fcmTokenRouter";
 import notificationRoute from "./notificationRoute";
+import admPasswordRouter from "./admpasswordRouter";
 
 import authMiddleware from "../middlewares/authMiddleware";
 
 const router = Router();
+
+// Rota de login do entregador
+router.use("/password", passwordRouter);
+
+// Rota de login do ADM
+router.use("/adm-password", admPasswordRouter);
+
+// Middlware de autenticação
+router.use(authMiddleware);
 
 // Rotas do ADM
 router.use("/deliveryman", deliverymanRouter);
 router.use("/recipient", recipientRouter);
 router.use("/order", orderRouter);
 router.use("/problem", problemRouter);
-router.use("/password", passwordRouter);
 router.use("/notification", notificationRoute);
-
-// Middlware de autenticação
-router.use(authMiddleware);
 
 // Rotas do entregador
 router.use("/deliveryman", dashboardRouter);
