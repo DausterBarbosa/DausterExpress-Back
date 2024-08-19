@@ -1,3 +1,5 @@
+require('dotenv/config');
+
 import { AppDataSource } from "../data-source";
 import Administrator from "../entity/Administrator";
 import HttpError from "../erros/HttpError";
@@ -26,9 +28,9 @@ class AdmPasswordService{
         const token = jwt.sign({
             id: administrator.id,
         },
-        "batinha",
+        process.env.SECRET_PASS,
         {
-            expiresIn: "5 days"
+            expiresIn: process.env.EXPIRES_IN,
         });
 
         return {

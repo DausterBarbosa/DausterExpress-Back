@@ -1,4 +1,7 @@
+require('dotenv/config');
+
 import "reflect-metadata";
+
 import { DataSource } from "typeorm";
 
 import Deliveryman from "./entity/Deliveryman";
@@ -9,11 +12,11 @@ import Administrator from "./entity/Administrator";
 
 export const AppDataSource = new DataSource({
     type: "postgres",
-    host: "kala.db.elephantsql.com",
-    port: 5432,
-    username: "hqgsypma",
-    password: "O_A0w0fvUSxvAAlZaVo-TXz7pXLvubH7",
-    database: "hqgsypma",
+    host: process.env.HOST,
+    port: Number(process.env.PORT),
+    username: process.env.USERNAME,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE,
     synchronize: true,
     logging: false,
     entities: [Deliveryman, Recipient, Order, Problem, Administrator],

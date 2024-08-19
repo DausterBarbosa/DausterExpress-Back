@@ -1,3 +1,5 @@
+require('dotenv/config');
+
 import { ILike } from "typeorm";
 
 import crypto from "crypto";
@@ -9,7 +11,8 @@ import Deliveryman from "../entity/Deliveryman";
 import HttpError from "../erros/HttpError";
 
 import DeliverymanData from "../types/DeliverymanData";
-import PhotoProfileData from "../types/PhotoProfileData";
+
+import Nodemailer from "../Email/nodemailer";
 
 class DeliverymanService {
     async create(data:DeliverymanData){
@@ -23,14 +26,16 @@ class DeliverymanService {
 
         const token = crypto.randomBytes(32).toString("hex");
 
-        await deliverymanRepository.save({
+        const deliverymanSave = await deliverymanRepository.save({
             ...data,
             reset_token: token,
         });
 
-        // Aqui vai enviar o email com a URL de cadastro de senha
-
-        console.log(`http://localhost:3333/create-password?token=${token}`);
+        await Nodemailer.sendEmail({
+            email: deliverymanSave.email,
+            nome: deliverymanSave.nome + " " + deliverymanSave.sobrenome,
+            url: `http://${process.env.APP_URL}/create-password?token=${token}`
+        });
     }
 
     async list(page, take, mode, deliverymanName){

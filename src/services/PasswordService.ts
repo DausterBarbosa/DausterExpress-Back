@@ -1,3 +1,5 @@
+require('dotenv/config');
+
 import {AppDataSource} from "../data-source";
 
 import Deliveryman from "../entity/Deliveryman";
@@ -50,9 +52,9 @@ class PasswordService{
         const token = jwt.sign({
             id: deliveryman.id,
         },
-        "batinha",
+        process.env.SECRET_PASS,
         {
-            expiresIn: "5 days"
+            expiresIn: process.env.EXPIRES_IN,
         });
 
         return {
