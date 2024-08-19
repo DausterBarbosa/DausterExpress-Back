@@ -20,5 +20,5 @@ AppDataSource.initialize().then(async () => {
     app.use(routes);
     app.use(errorHandling);
 
-    app.listen(3333);
+    app.listen(8080);
 }).catch(error => console.log(error));
