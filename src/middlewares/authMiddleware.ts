@@ -1,3 +1,5 @@
+require('dotenv/config');
+
 import {NextFunction, Response} from "express";
 
 import jwt, { JwtPayload } from "jsonwebtoken";
@@ -13,7 +15,7 @@ export default function authMiddleware(req:CustomRequest, res:Response, next:Nex
     }
 
     try {
-        const data = jwt.verify(token, "batinha");
+        const data = jwt.verify(token, process.env.SECRET_PASS);
 
         req.userId = (data as JwtPayload).id as string;
 
