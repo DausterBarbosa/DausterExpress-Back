@@ -20,5 +20,5 @@ AppDataSource.initialize().then(async () => {
     app.use(routes);
     app.use(errorHandling);
 
-    app.listen(8080);
+    app.listen(process.env.PORT);
 }).catch(error => console.log(error));
