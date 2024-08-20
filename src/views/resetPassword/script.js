@@ -17,7 +17,7 @@ document.getElementById("passwordForm").addEventListener("submit", (event) => {
         button.disabled = true;
         button.innerText = 'CARREGANDO...';
 
-        fetch("http://localhost:3333/password/register", {
+        fetch(`http://${process.env.APP_URL}/password/register`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

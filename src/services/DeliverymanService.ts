@@ -34,7 +34,7 @@ class DeliverymanService {
         await Nodemailer.sendEmail({
             email: deliverymanSave.email,
             nome: deliverymanSave.nome + " " + deliverymanSave.sobrenome,
-            url: `http://${process.env.APP_URL}/create-password?token=${token}`
+            url: `http://${process.env.APP_URL}/password/create?token=${token}`
         });
     }
 
