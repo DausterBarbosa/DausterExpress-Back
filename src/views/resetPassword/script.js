@@ -1,5 +1,3 @@
-require('dotenv/config');
-
 document.getElementById("passwordForm").addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -19,7 +17,7 @@ document.getElementById("passwordForm").addEventListener("submit", (event) => {
         button.disabled = true;
         button.innerText = 'CARREGANDO...';
 
-        fetch(`https://${process.env.APP_URL}/password/register`, {
+        fetch("https://dausterexpress-back.onrender.com/password/register", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
