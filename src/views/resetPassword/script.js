@@ -1,3 +1,5 @@
+require('dotenv/config');
+
 document.getElementById("passwordForm").addEventListener("submit", (event) => {
     event.preventDefault();
 
