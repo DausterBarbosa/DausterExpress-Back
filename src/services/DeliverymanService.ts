@@ -43,7 +43,9 @@ class DeliverymanService {
 
         let selectFields = [];
 
-        let whereConditions = {};
+        let whereConditions = {
+            reset_token: null,
+        };
 
         if(mode === "summary"){
             selectFields = ["id", "nome", "sobrenome", "url_image_profile", "fcm_token"];
