@@ -18,6 +18,8 @@ import authMiddleware from "../middlewares/authMiddleware";
 
 const router = Router();
 
+router.get("/keepalive", (req, res) => res.send("Estou vivo!!!"));
+
 // Rota de login do entregador
 router.use("/password", passwordRouter);
 
